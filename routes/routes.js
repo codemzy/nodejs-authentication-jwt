@@ -7,6 +7,8 @@ module.exports = function (app) {
     
     // 
     app.route('/signup')
-        .post(Authentication.signup);
-    
+        // to recieve post requests from signup form
+        .post(Authentication.signup)
+        // just to test if working
+        .get(Authentication.signup);
 };
