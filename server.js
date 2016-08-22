@@ -1,8 +1,12 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
+const mongoose = require('mongoose');
 
 app.use(express.static('public'));
+
+// DB setup
+mongoose.connect('mongodb://localhost:27017/auth');
 
 // use morgan for logging errors
 app.use(morgan('combined'));
