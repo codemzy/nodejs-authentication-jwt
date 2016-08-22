@@ -1,6 +1,6 @@
-var express = require('express');
-var app = express();
-var morgan = require('morgan');
+const express = require('express');
+const app = express();
+const morgan = require('morgan');
 
 app.use(express.static('public'));
 
@@ -11,7 +11,7 @@ app.use(morgan('combined'));
 app.set('port', (process.env.PORT || 8080));
 
 // routes
-var routes = require('./routes/routes.js');
+const routes = require('./routes/routes.js');
 routes(app);
 
 // start the server
