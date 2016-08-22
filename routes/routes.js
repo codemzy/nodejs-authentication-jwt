@@ -10,7 +10,5 @@ module.exports = function (app) {
     // 
     app.route('/signup')
         // to recieve post requests from signup form
-        .post(parseUrlencoded, Authentication.signup)
-        // just to test if working
-        .get(Authentication.signup);
+        .post(parseUrlencoded, Authentication.signup);
 };
