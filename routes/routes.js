@@ -10,6 +10,7 @@ const passportService = require('../services/passport.js');
 
 // session false as we are not using cookies, using tokens
 const requireAuth = passport.authenticate('jwt', { session: false });
+const requireSignIn = passport.authenticate('local', { session: false });
 
 module.exports = function (app) {
     
@@ -17,6 +18,11 @@ module.exports = function (app) {
     app.route('/signup')
         // to recieve post requests from signup form
         .post(jsonParser, Authentication.signup);
+        
+    // take user data and create user in DB
+    app.route('/signin')
+        // to recieve post requests from signup form
+        .post(jsonParser, requireSignIn, Authentication.signin);
         
     // protected route
     app.route('/protected')
