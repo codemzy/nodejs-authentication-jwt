@@ -8,7 +8,12 @@ require('dotenv').config();
 const secret = process.env.SECRET_STR;
 
 // Set up options for JWT strategy
-const jwtOptions = {};
+const jwtOptions = {
+    // look in the header of the request for the token
+    jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+    // decode with the secret
+    secretOrKey: secret
+};
 
 // Create JWT strategy
 // payload is the token (sub) and timestamp (iat)
@@ -29,4 +34,5 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
 });
 
 // Tell passport to use this strategy
+passport.use(jwtLogin);
 
