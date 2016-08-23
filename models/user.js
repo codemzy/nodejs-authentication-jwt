@@ -30,6 +30,17 @@ userSchema.pre('save', function(next) {
     });
 });
 
+// bcrypt encrypts the provided password with the salt off the user.password, and sees if the 
+// encrypted version of the provided password matches the stored encrypted password
+userSchema.methods.comparePassword = function(candidatePassword, callback) {
+    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+        if (err) {
+            return callback(err);
+        }
+        callback(null, isMatch);
+    })
+}
+
 // create the model class
 const ModelClass = mongoose.model('user', userSchema);
 
