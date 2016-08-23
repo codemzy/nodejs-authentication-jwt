@@ -6,7 +6,7 @@ const jsonParser = bodyParser.json();
 const Authentication = require('../controllers/authentication');
 // services
 const passport = require('passport');
-const passportService = require('../services/passport.js');
+const passportService = require('../services/passport.js'); // this needs to be run but is not directly referenced in this file
 
 // session false as we are not using cookies, using tokens
 const requireAuth = passport.authenticate('jwt', { session: false });
