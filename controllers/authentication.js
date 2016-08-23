@@ -1,4 +1,17 @@
+'use strict';
+
+const jwt = require('jwt-simple');
+
 const User = require('../models/user');
+
+require('dotenv').config();
+const secret = process.env.SECRET_STR;
+
+function tokenForUser(user) {
+    const timestamp = new Date().getTime();
+    // the subject (sub) of this token is the user id, iat = issued at time
+    return jwt.encode({ sub: user.id, iat: timestamp }, secret);
+}
 
 exports.signup = function(req, res, next) {
     const EMAIL = req.body.email;
@@ -27,7 +40,7 @@ exports.signup = function(req, res, next) {
                 return next(err);
             }
             // Respond to request indicating the user was created
-            res.json({ message: "User created" });
+            res.json({ token: tokenForUser(USER) });
         });
         
         
