@@ -1,6 +1,7 @@
 'use strict';
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
+const cors = require('cors');
 
 // controllers
 const Authentication = require('../controllers/authentication');
@@ -12,7 +13,14 @@ const passportService = require('../services/passport.js'); // this needs to be 
 const requireAuth = passport.authenticate('jwt', { session: false });
 const requireSignIn = passport.authenticate('local', { session: false });
 
+// cors setup 
+var corsOptions = {
+  origin: 'https://react-redux-auth-frontend-codemzy.c9users.io'
+};
+
 module.exports = function (app) {
+    // allow requests from cross origin
+    app.use(cors(corsOptions));
     
     // take user data and create user in DB
     app.route('/signup')
