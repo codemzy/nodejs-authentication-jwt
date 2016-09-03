@@ -7,7 +7,8 @@
     ------------------------------------------------------------------------------ 
 
 
-Backend Authentication API with NodeJS
+Backend Authentication API with NodeJS and MongoDB with Mongoose.
+For MongoDB without Mongoose version see https://github.com/codemzy/nodejs-authentication-jwt-mongodb
 
 Using:
 
