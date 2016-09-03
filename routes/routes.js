@@ -7,7 +7,7 @@ const cors = require('cors');
 const Authentication = require('../controllers/authentication');
 // services
 const passport = require('passport');
-const passportService = require('../services/passport.js'); // this needs to be run but is not directly referenced in this file
+require('../services/passport.js'); // this needs to be run but is not directly referenced in this file
 
 // session false as we are not using cookies, using tokens
 const requireAuth = passport.authenticate('jwt', { session: false });
@@ -27,9 +27,9 @@ module.exports = function (app) {
         // to recieve post requests from signup form
         .post(jsonParser, Authentication.signup);
         
-    // take user data and create user in DB
+    // take user data and check user exists in DB
     app.route('/signin')
-        // to recieve post requests from signup form
+        // to recieve post requests from signin form
         .post(jsonParser, requireSignIn, Authentication.signin);
         
     // protected route
